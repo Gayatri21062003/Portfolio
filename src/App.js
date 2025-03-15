@@ -1,10 +1,13 @@
+import {BrowserRouter} from "react-router-dom";
 import "./App.css";
 import Layout from "./dashborad/Layout";
 
 function App() {
     return (
         <div>
-            <Layout />
+            <BrowserRouter>
+                <Layout />
+            </BrowserRouter>
         </div>
     );
 }

@@ -9,7 +9,7 @@ function Header() {
 
     const [openMobileMenu, setOpenMobileMenu] = React.useState(false);
     return (
-        <Box>
+        <Box sx={{position: "sticky", top: 0, zIndex: 1100}}>
             {/* Laptop Screen  */}
             {!isMobileOrTab && (
                 <Box
@@ -17,11 +17,8 @@ function Header() {
                     sx={{
                         width: "100vw",
                         height: "auto",
-                        backgroundColor: theme.palette.background.paper,
+                        backgroundColor: "white",
                         boxShadow: "0px 0px 5px 0px rgba(0,0,0,0.25) ", //horizonatal vertical blur spread color
-                        position: "sticky",
-                        top: 0,
-                        zIndex: 1000,
                     }}
                 >
                     <Stack direction={"row"} alignItems={"center"} justifyContent={"space-evenly"}>
@@ -35,7 +32,7 @@ function Header() {
                         {/* Header Menu */}
                         <Stack direction={"row"} alignItems={"center"} justifyContent={"center"} spacing={5}>
                             {["HOME", "ABOUT", "PROJECTS", "SKILLS", "CONTACT"].map((menu, index) => (
-                                <Typography>{menu}</Typography>
+                                <Typography fontWeight="bold">{menu}</Typography>
                             ))}
                         </Stack>
 
@@ -60,59 +57,59 @@ function Header() {
 
             {isMobileOrTab && (
                 <Box
-                    p={1}
+                    p={2}
                     sx={{
                         width: "100vw",
                         height: "auto",
-                        backgroundColor: theme.palette.background.paper,
-                        boxShadow: "0px 0px 5px 0px rgba(0,0,0,0.25) ",
+                        backgroundColor: "white",
+                        boxShadow: "0px 0px 5px 0px rgba(0,0,0,0.25)",
                     }}
                 >
-                    <Stack direction={"row"} justifyContent={"space-evenly"} alignItems={"center"}>
-                        <Stack direction={"row"} alignItems={"center"}>
-                            <Box>
-                                <img src={Logo} alt="Gayatri Sontakke" width={"50%"} />
-                            </Box>
-                        </Stack>
-                        <Stack direction={"row"} alignItems={"center"}>
-                            <IconButton
-                                onClick={() => {
-                                    setOpenMobileMenu(true);
-                                }}
-                            >
-                                <List size={32} />
-                            </IconButton>
-                        </Stack>
+                    <Stack direction={"row"} alignItems={"center"}>
+                        <Box>
+                            <img src={Logo} alt="Gayatri Sontakke" width={"50%"} />
+                        </Box>
+                        <IconButton
+                            onClick={() => {
+                                setOpenMobileMenu(!openMobileMenu);
+                            }}
+                        >
+                            <List size={32} />
+                        </IconButton>
                     </Stack>
-                    <Box>
-                        <Drawer anchor={"right"} open={openMobileMenu}>
-                            <Box sx={{width: 200, height: "auto", backgroundColor: theme.palette.background.paper}}>
-                                <Box
-                                    p={1}
-                                    sx={{
-                                        boxShadow: "0px 0px 5px 0px rgba(0,0,0,0.25) ",
-                                    }}
-                                >
-                                    <Stack direction={"row"} justifyContent={"start"} alignItems={"center"}>
-                                        <IconButton
-                                            onClick={() => {
-                                                setOpenMobileMenu(!openMobileMenu);
-                                            }}
-                                        >
-                                            <List size={32} />
-                                        </IconButton>
-                                    </Stack>
-                                </Box>
-                                <Box px={2} py={3}>
-                                    <Stack direction={"column"} justifyContent={"start"} spacing={1}>
-                                        {["HOME", "ABOUT", "PROJECTS", "SKILLS", "CONTACT"].map((menu, index) => (
-                                            <Typography>{menu}</Typography>
-                                        ))}
-                                    </Stack>
-                                </Box>
-                            </Box>
-                        </Drawer>
-                    </Box>
+                    <Drawer anchor="right" open={openMobileMenu}>
+                        <Box sx={{width: "200px"}}>
+                            <Stack direction={"column"} spacing={2}>
+                                <Stack direction={"row"} p={2} sx={{boxShadow: "0px 0px 5px 0px rgba(0,0,0,0.25)"}}>
+                                    <IconButton
+                                        onClick={() => {
+                                            setOpenMobileMenu(!openMobileMenu);
+                                        }}
+                                    >
+                                        <List size={32} color="black" />
+                                    </IconButton>
+                                </Stack>
+                                <Stack px={4} direction={"column"} spacing={2}>
+                                    {["HOME", "ABOUT", "PROJECTS", "SKILLS", "CONTACT"].map((menu, index) => (
+                                        <Typography fontWeight="bold">{menu}</Typography>
+                                    ))}
+                                </Stack>
+                                <Stack direction={"row"} alignItems={"start"} px={4}>
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            textTransform: "none",
+                                            color: "black",
+                                            borderColor: "black",
+                                            borderRadius: 2,
+                                        }}
+                                    >
+                                        Hire Me
+                                    </Button>
+                                </Stack>
+                            </Stack>
+                        </Box>
+                    </Drawer>
                 </Box>
             )}
         </Box>
